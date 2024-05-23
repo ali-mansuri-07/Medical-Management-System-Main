@@ -1,0 +1,82 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="card">
+    <div class="class-header"><h3>Create Profile</h3></div>
+    <div class="card-body">
+      <form [formGroup]="updatePatientForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control custom-input" id="name" formControlName="name">
+              <div *ngIf="updatePatientForm.get('name')?.invalid && updatePatientForm.get('name')?.touched" class="text-danger">
+                <div *ngIf="updatePatientForm.get('name')?.errors?.['required']">Name is required.</div>
+                <div *ngIf="updatePatientForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters long.</div>
+               <div *ngIf="updatePatientForm.get('name')?.errors?.['maxlength']">Name cannot exceed 50 characters.</div>
+               <div *ngIf="updatePatientForm.get('name')?.errors?.['pattern']">Name must contain only alphabets.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender:</label>
+              <select class="form-control custom-input" id="gender" formControlName="gender">
+                <option value="" disabled selected>Select Gender</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Other</option>
+              </select>
+              <div *ngIf="updatePatientForm.get('gender')?.invalid && updatePatientForm.get('gender')?.touched" class="text-danger">
+                <div *ngIf="updatePatientForm.get('gender')?.errors?.['required']">Gender is required.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control custom-input" id="email" formControlName="email">
+              <div *ngIf="updatePatientForm.get('email')?.invalid && updatePatientForm.get('email')?.touched" class="text-danger">
+                <div *ngIf="updatePatientForm.get('email')?.errors?.['required']">Email is required.</div>
+                <div *ngIf="updatePatientForm.get('email')?.errors?.['email']">Invalid email format.</div>
+              </div>
+            </div> 
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="bloodGroup">Blood Group:</label>
+              <select class="form-control custom-input" id="bloodGroup" formControlName="bloodGroup">
+                <option value="" disabled selected>Select Blood Group</option>
+                <option value="Ap">A+</option>
+                <option value="An">A-</option>
+                <option value="Bp">B+</option>
+                <option value="Bn">B-</option>
+                <option value="ABp">AB+</option>
+                <option value="ABn">AB-</option>
+                <option value="Op">O+</option>
+                <option value="On">O-</option>
+                <!-- <option value="Unknown">Unknown</option> -->
+              </select>
+              <div *ngIf="updatePatientForm.get('bloodGroup')?.invalid && updatePatientForm.get('bloodGroup')?.touched" class="text-danger">
+                <div *ngIf="updatePatientForm.get('bloodGroup')?.errors?.['required']">Blood Group is required.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contactNumber">Contact Number:</label>
+              <input type="text" class="form-control custom-input" id="contactNumber" formControlName="contactNumber">
+              <div *ngIf="updatePatientForm.get('contactNumber')?.invalid && updatePatientForm.get('contactNumber')?.touched" class="text-danger">
+                <div *ngIf="updatePatientForm.get('contactNumber')?.errors?.['required']">Contact Number is required.</div>
+                <div *ngIf="updatePatientForm.get('contactNumber')?.errors?.['pattern']">Invalid contact number format.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="birthYear">Birth Year:</label>
+              <input type="text" class="form-control custom-input" id="birthYear" formControlName="birthYear">
+              <div *ngIf="updatePatientForm.get('birthYear')?.invalid && updatePatientForm.get('birthYear')?.touched" class="text-danger">
+                <div *ngIf="updatePatientForm.get('birthYear')?.errors?.['required']">Birth Year is required.</div>
+                <div *ngIf="updatePatientForm.get('birthYear')?.errors?.['pattern']">Invalid Birth Year format.</div>
+                <div *ngIf="updatePatientForm.get('birthYear')?.errors?.['maxCurrentYear']">Birth Year cannot be greater than the current year.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success" [class.disabled]="!updatePatientForm.valid">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

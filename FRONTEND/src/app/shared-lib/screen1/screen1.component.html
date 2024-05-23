@@ -1,0 +1,168 @@
+<div style="display: flex; flex-direction: row; height: 52rem">
+  <div
+    style="
+      width: 50%;
+      align-content: center;
+      justify-content: center;
+      text-align: start;
+      padding: 5rem;
+      color: #0b3e25;
+      font-family: 'Mulish';
+    "
+  >
+    <div style="margin-top: 5rem">
+      <h1 style="font-size: 2.7rem; line-height: 3.8rem">
+        Providing Quality <span style="color: #297450">Healthcare</span> For A
+        <span style="color: #6eab36">Brighter</span> And
+        <span style="color: #6eab36">Healthy</span> Future
+      </h1>
+
+      <h3 style="color: #363434af; margin-top: 3rem; font-family: 'Mulish'">
+        At our hospital, we are dedicated to providing exceptional medical care
+        to our patients and their families. Our experienced team of medical
+        professionals, cutting-edge technology, and compassionate approach make
+        us a leader in the healthcare industry
+      </h3>
+      <button
+        type="button"
+        class="btn btn-success secondary"
+        style="width: 20rem; height: 3rem; margin-top: 2rem"
+        (click)="scrollToCarousel()"
+      >
+        BOOK APPOINTMENT
+      </button>
+    </div>
+  </div>
+
+  <div style="padding: 5rem; width: 50%">
+    <img src="/assets/doctor.png" alt="Doctor Image" class="responsive-image" />
+  </div>
+</div>
+
+<div
+  style="
+    background-color: #3eb47b3c;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem;
+    font-family: 'Mulish';
+  "
+>
+  <div style="width: 50%; margin: auto">
+    <h1 style="color: #0b3e25; font-size: 3rem; font-weight: bolder">
+      Find The Perfect Doctor For You
+    </h1>
+    <h1 style="color: #0b3e25; font-size: 3rem; font-weight: bolder">
+      With Ease
+    </h1>
+    <h3 style="color: #363434af; margin-top: 3rem; font-family: 'Mulish'">
+      Our medical management system makes it incredibly simple to search for and
+      book appointments with doctors of your choice. With just a few clicks, you
+      can find the right doctor who meets your specific needs and preferences.
+    </h3>
+
+    <div
+      class="form-outline"
+      data-mdb-input-init
+      style="margin-top: 2rem; display: flex; flex-direction: row"
+    >
+      <input
+        type="search"
+        id="form1"
+        class="form-control"
+        placeholder="Search by doctors, specialization....."
+        aria-label="Search"
+        style="
+          height: 3.5rem;
+          border-radius: 0.5rem;
+          border: 2px solid #297450;
+          width: 35rem;
+          margin-right: 1rem;
+        "
+        [(ngModel)]="searchQuery"
+      />
+      <button
+        type="button"
+        class="btn btn-success"
+        style="width: 15rem; height: 3.5rem; background-color: #297450"
+        (click)="loadData('fees_asc')"
+      >
+        <h4 class="m-0">Search</h4>
+      </button>
+      <div ngbDropdown class="d-inline-block">
+        <button type="button"
+        class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>
+          Sort By
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem class="drop-item" (click)="loadData('fees_asc')">Fees(L to H)</button>
+          <button ngbDropdownItem class="drop-item" (click)="loadData('fees_dsc')">Fees(H to L)</button>
+          <button ngbDropdownItem class="drop-item" (click)="loadData('rating_asc')">Rating(L to H)</button>
+          <button ngbDropdownItem class="drop-item" (click)="loadData('rating_dsc')">Rating(H to L)</button>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+<div class="container mt-3 mb-3" *ngIf="doctors.length > 0">
+  <div id="doctor-container" class="row">
+    <div
+      class="col-md-3"
+      *ngFor="let doctor of doctors"
+      [@slideInOut]="direction"
+      (click)="goToDoctorSlotBookingScreen(doctor)">
+      <div class="card">
+        <div class="card-body d-flex align-items-start">
+          <div class="d-flex justify-content-center align-items-center w-100">
+            <img
+              *ngIf="doctor.profileImgUrl"
+              class="profile-pic mx-auto d-block"
+              [src]="doctor.profileImgUrl"
+              alt="Doctor Image" />
+            <img
+              *ngIf="!doctor.profileImgUrl"
+              class="profile-pic mx-auto d-block"
+              src="/assets/default-pic.jpg"
+              alt="Default Image" />
+          </div>
+          <div class="text-start">
+            <h2 class="card-title fs-5 mt-2 fw-bold">Dr. {{ doctor.name | titlecase }}</h2>
+            <p class="card-text">Gender: {{ doctor.gender === 'M' ? 'Male' : (doctor.gender === 'F' ? 'Female' : 'Other') }}</p>
+            <p class="card-text">Specialization: {{ doctor.specialization }}</p>
+            <p class="card-text">Qualifications: {{ doctor.qualification }}</p>
+            <p class="card-text">Experience: {{ getCurrentYear()-doctor.experienceStart }} years</p>
+            <p class="card-text">
+              Rating:
+              <span *ngFor="let star of getStarArray(doctor.rating)">
+                <i class="bi bi-star-fill" style="color: rgb(216, 151, 30)"></i>
+              </span>
+            </p>
+            <p class="card-text">Fees: <i class="bi bi-currency-rupee">{{ doctor?.fees }}</i></p>
+            <button class="btn btn-success">Book Appointment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center mt-3 justify-content-center" *ngIf="doctors.length > 0">
+    <nav class="pagination-container" aria-label="Page navigation example">
+      <ul class="pagination" role="button">
+        <li class="page-item" (click)="pageDecrement()" [class.disabled]="page === 0">
+          <a class="page-link">&laquo; Previous</a>
+        </li>
+        <ng-container *ngFor="let p of visiblePages(); let i = index">
+          <li class="page-item" [class.active]="i + visiblePages()[0] === page">
+            <a class="page-link" (click)="setPage(i + visiblePages()[0], $event)">{{ i + visiblePages()[0] + 1 }}</a>
+          </li>
+        </ng-container>
+        <li class="page-item" (click)="pageIncrement()" [class.disabled]="page === pages.length - 1">
+          <a class="page-link">Next &raquo;</a>
+        </li>
+      </ul>
+    </nav>
+  </div>  
+  
+</div>

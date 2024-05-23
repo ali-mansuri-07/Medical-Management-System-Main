@@ -1,0 +1,59 @@
+<div class="card">
+  <div class="card-header">
+    <h2>{{ name  | titlecase }}</h2>
+  </div>
+  <div class="card-body">
+    <p><strong>Gender:</strong> {{ gender }}</p>
+    <p><strong>Email:</strong> {{ email }}</p>
+    <p><strong>Birth Year:</strong> {{ birthYear }}</p>
+    <p><strong>Blood Group:</strong> {{ mapBloodType(bloodGroup) }}</p>
+    <p><strong>Contact Number:</strong>{{ contactNumber }}</p>
+    <button
+      *ngIf="!loginService.getPatientId(); else editProfileButton"
+      routerLink="update-profile"
+      type="button"
+      class="btn btn-success w-100"
+      (click)="redirectToUpdateProfile()"
+    >
+      Create Profile
+    </button>
+    <ng-template #editProfileButton>
+      <button
+        routerLink="edit-profile"
+        type="button"
+        class="btn btn-success btn-sm w-100"
+        (click)="redirectToEditProfile()"
+      >
+        Edit Profile
+      </button>
+    </ng-template>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header view-appointments">
+    <h6>View Appointments</h6>
+  </div>
+  <div class="card-body d-flex justify-content-center">
+    <div class="row">
+      <div class="col-md-12 mb-2">
+        <button
+          [routerLink]="'/patient/upcoming-appointments'"
+          routerLinkActive="active"
+          class="btn btn-outline-success btn-sm w-100"
+        >
+          <i class="bi bi-calendar-week-fill"></i> Upcoming Appointments
+        </button>
+      </div>
+      <div class="col-md-12">
+        <button
+          [routerLink]="'/patient/completed-appointments'"
+          routerLinkActive="active"
+          class="btn btn-outline-success btn-sm w-100"
+        >
+          <i class="bi bi-calendar-check-fill"></i> Completed Appointments
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

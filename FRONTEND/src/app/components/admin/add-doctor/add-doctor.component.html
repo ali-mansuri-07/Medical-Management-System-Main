@@ -1,0 +1,169 @@
+<div class="panel">
+  <div class="doctor-details">
+    <div class="title">
+      <span class="add-details">Add Details</span>
+      <button class="spec-btn" type="button" data-bs-toggle="modal" data-bs-target="#specializationModal">
+        + Add Specialization
+      </button>
+    </div>
+    <form novalidate  [formGroup]="addDoctorForm" (ngSubmit)="saveDoctor()" class="form-style">
+      
+      <div class="form-left">
+        <div class="form-group">
+          <label for="name">Doctor's name<span class="text-danger ms-2">*</span></label>
+          <input required type="text" id="name" class="form-control" aria-describedby="emailHelp"
+            placeholder="Enter name" name="name" formControlName="name" [(ngModel)]="doctor.name" />
+            <div *ngIf="addDoctorForm.get('name')?.invalid && addDoctorForm.get('name')?.touched" class="text-danger">
+                <div *ngIf="addDoctorForm.get('name')?.errors?.['required']">Name is required.</div>
+                <div *ngIf="addDoctorForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters long.</div>
+               <div *ngIf="addDoctorForm.get('name')?.errors?.['maxlength']">Name cannot exceed 50 characters.</div>
+               <div *ngIf="addDoctorForm.get('name')?.errors?.['pattern']">Name must contain only alphabets.</div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email<span class="text-danger ms-2">*</span></label>
+          <input required type="email" class="form-control" id="email" placeholder="Enter email" name="email"
+            [(ngModel)]="doctor.email" formControlName="email"/>
+            <div *ngIf="addDoctorForm.get('email')?.invalid && addDoctorForm.get('email')?.touched" class="text-danger">
+              <div *ngIf="addDoctorForm.get('email')?.errors?.['required']">Email is required.</div>
+              <div *ngIf="addDoctorForm.get('email')?.errors?.['email']">Invalid email format.</div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="qualification">Qualification<span class="text-danger ms-2">*</span></label>
+          <input required type="text" class="form-control" id="qualification" placeholder="Enter qualification"
+            name="qualification" [(ngModel)]="doctor.qualification" formControlName="qualification"/>
+            <div *ngIf="addDoctorForm.get('qualification')?.invalid && addDoctorForm.get('qualification')?.touched" class="text-danger">
+              <div *ngIf="addDoctorForm.get('qualification')?.errors?.['required']">Qualification is required.</div>
+              <div *ngIf="addDoctorForm.get('qualification')?.errors?.['minlength']">Qualification must be at least 2 characters long.</div>
+              <div *ngIf="addDoctorForm.get('qualification')?.errors?.['maxlength']">Qualification cannot exceed 30 characters.</div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="experience">Experience Start<span class="text-danger ms-2">*</span></label>
+          <input required type="date" class="form-control" id="experience"
+            name="experienceStart" [(ngModel)]="doctor.experienceStart" formControlName="experience"  max="{{ getCurrentDate() }}" />
+            <div *ngIf="addDoctorForm.get('experience')?.invalid && addDoctorForm.get('experience')?.touched" class="text-danger">
+              <div *ngIf="addDoctorForm.get('experience')?.errors?.['required']">experience is required.</div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label required for="specialization">Specialization<span class="text-danger ms-2">*</span></label>
+          <select required class="form-select" name="specialization" id="specialization"
+            [(ngModel)]="doctor.specialization" formControlName="specialization">
+            <option value="" disabled selected>Select doctor's specialization</option>
+            <option *ngFor="let specData of specializations" [value]="specData.name">{{specData.name}}</option>
+          </select>
+          <div *ngIf="addDoctorForm.get('specialization')?.invalid && addDoctorForm.get('specialization')?.touched" class="text-danger">
+            <div *ngIf="addDoctorForm.get('specialization')?.errors?.['required']">specialization is required.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-right">
+        <div class="form-group">
+          <label for="username">Username<span class="text-danger ms-2">*</span></label>
+          <input required type="text" class="form-control" id="username" aria-describedby="emailHelp"
+            placeholder="Enter username" name="userName" [(ngModel)]="doctor.userName" formControlName="username"/>
+            <div *ngIf="addDoctorForm.get('username')?.invalid && addDoctorForm.get('username')?.touched" class="text-danger">
+              <div *ngIf="addDoctorForm.get('username')?.errors?.['required']">Username is required.</div>
+              <div *ngIf="addDoctorForm.get('username')?.errors?.['minlength']">Username must be at least 3 characters long.</div>
+              <div *ngIf="addDoctorForm.get('username')?.errors?.['maxlength']">Username cannot exceed 20 characters.</div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password<span class="text-danger ms-2">*</span></label>
+          <div class="input-group">
+            <input required type="password" class="form-control" id="password" placeholder="Enter password" name="password"
+              [(ngModel)]="doctor.password" formControlName="password" #passwordField/>
+            <button class="btn btn-light" type="button" (click)="togglePasswordVisibility(passwordField)">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+          <div *ngIf="addDoctorForm.get('password')?.invalid && addDoctorForm.get('password')?.touched" class="text-danger">
+            <div *ngIf="addDoctorForm.get('password')?.errors?.['required']">Password is required.</div>
+            <!-- <div *ngIf="addDoctorForm.get('password')?.errors?.['minlength']">Password should be at least 6 characters long.</div>
+            <div *ngIf="addDoctorForm.get('password')?.errors?.['maxlength']">Password cannot exceed 20 characters.</div> -->
+            <div *ngIf="addDoctorForm.get('password')?.errors?.['pattern']">Password must contain at least one uppercase letter, 
+              one lowercase letter, one number, and be at least 8 characters long.</div>
+          </div>
+        </div>           
+        <div class="form-group">
+          <label for="gender">Gender<span class="text-danger ms-2">*</span></label>
+          <select required class="form-select" id="gender" name="gender" [(ngModel)]="doctor.gender" formControlName="gender">
+            <option value="" disabled selected>Select your option</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fee">Doctor fees<span class="text-danger ms-2">*</span></label>
+          <input required type="number" class="form-control" id="fee" placeholder="fees" min="0" name="fees"
+            [(ngModel)]="doctor.fees" formControlName="fee"/>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group">
+            <label for="profile-img" class="form-label">Profile Photo (Max size: 2 MB)</label>
+            <input class="form-control" name="profile-img" type="file" id="profile-img" (change)="onFileSelected($event,0)" accept="image/*"/>
+            <div *ngIf="fileSizeError[0]" class="text-danger">File size exceeds the limit (2 MB).</div>
+          </div>
+        </div>
+
+        <button id="submit" type="submit" class="btn btn-primary" [disabled]="!addDoctorForm.valid || isSubmitDisabled[0]">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="specializationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-2">
+      <div class="modal-header d-flex justify-content-center align-content-center">
+        <h1 class="modal-title mb-0 fw-medium fs-4" id="exampleModalLabel">Add Specialization</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="specForm.reset()"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form noValidate [formGroup]="specForm" (ngSubmit)="saveSpecialization()" id="specForm">
+          <div class="form-group group">
+            <label for="spec-img">Specialization image(Max size: 2 MB)</label>
+            <input type="file" class="form-control" id="spec-img" name="img" (change)="onFileSelected($event,1)" accept="image/*">
+            <div *ngIf="fileSizeError[1]" class="text-danger">File size exceeds the limit (2 MB).</div>
+          </div>
+          <div class="form-group group">
+            <label for="name">Name<span class="text-danger ms-2">*</span></label>
+            <input type="text" class="form-control" id="name" name="specName" formControlName="specName" [(ngModel)]="specialization.name" required>
+            <div *ngIf="specForm.get('specName')?.invalid && specForm.get('specName')?.touched" class="text-danger">
+              <div *ngIf="specForm.get('specName')?.errors?.['required']">Specialization name is required.</div>
+              <div *ngIf="specForm.get('specName')?.errors?.['minlength']">Specialization name must be at least 3 characters long.</div>
+             <div *ngIf="specForm.get('specName')?.errors?.['maxlength']">Specialization name cannot exceed 20 characters.</div>
+          </div>
+          </div>
+          <div class="form-group group">
+            <label for="desc">Description<span class="text-danger ms-2">*</span></label>
+            <textarea id="desc" name="desc" class="form-control" rows="4" maxlength="250"
+              [(ngModel)]="specialization.description" formControlName="desc" required></textarea>
+            <small class="form-text text-muted">
+              Max 250 characters.
+            </small>
+            <div *ngIf="specForm.get('desc')?.invalid && specForm.get('desc')?.touched" class="text-danger">
+              <div *ngIf="specForm.get('desc')?.errors?.['required']">Description is required.</div>
+              <div *ngIf="specForm.get('desc')?.errors?.['minlength']">Description must be at least 30 characters long.</div>
+          </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="close" class="btn" (click)="specForm.reset()"
+              data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn modal-btn-style" [disabled]="!specForm.valid || isSubmitDisabled[1]">Save changes</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

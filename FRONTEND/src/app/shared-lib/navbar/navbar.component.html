@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg primary" style="height: 5rem;">
+  <div class="container-fluid d-flex ">
+    <a routerLink="" class="navbar-brand d-flex align-items-center" style="margin-left: 5%">
+      <img src="assets/logo.png" class="me-2" height="45" alt="CoolBrand" />
+      <h5 style="color: white; margin-bottom: 0px; font-family: 'Lexend Tera'; text-align: center;">
+        Medicare
+      </h5>
+      <img src="assets/logo6.png" style="margin-left: 2rem;" height="25" alt="NRI">
+    </a>
+      <div class="navbar-nav ">
+        <a routerLink="" style="padding-top: 12px;" class="nav-item nav-link active">Home</a>
+        <div class="logins d-flex align-items-center">
+          <button *ngIf="!loginService.isLoggedIn()" [routerLink]="'/signup'" type="button" class="btn" style="padding-top: 12px;">Sign Up</button>
+          <button *ngIf="!loginService.isLoggedIn()" [routerLink]="'/login'" type="button" class="btn secondary" style="margin-top: 4px;">Login</button>
+          <button class="btn profile-btn-style " [routerLink]="loginService.getUserRole() === 'ROLE_ADMIN' ? '/admin/dashboard' : '/'" *ngIf="loginService.isLoggedIn() && loginService.getUserRole()=== 'ROLE_ADMIN'"><i class="bi bi-person-fill me-2 fs-4"></i>{{currentUser}}</button>
+          <button class="btn profile-btn-style" [routerLink]="loginService.getUserRole() === 'ROLE_DOCTOR' ? '/doctor/upcoming-appointments' : '/'"  *ngIf="loginService.isLoggedIn() && loginService.getUserRole()=== 'ROLE_DOCTOR'"><i class="bi bi-person-fill me-2 fs-4"></i>{{currentUser}}</button>
+          <button class="btn profile-btn-style" [routerLink]="loginService.getUserRole() === 'ROLE_PATIENT' ? '/patient/upcoming-appointments' : '/'"  *ngIf="loginService.isLoggedIn()&&  loginService.getUserRole()=== 'ROLE_PATIENT'"><i class="bi bi-person-fill me-2 fs-4"></i>{{currentUser}}</button>
+          <button *ngIf="loginService.isLoggedIn()" (click)="confirm()" type="button" class="btn btn-success secondary" style="margin-top: 4px;">Logout</button>
+        </div>
+    </div>
+  </div>
+</nav>

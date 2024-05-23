@@ -1,0 +1,41 @@
+.report-panel{
+    background-color: white;
+    height: 85vh;
+    width: 98%;
+    border-radius: 1rem;
+    padding: 2rem 3rem;
+}
+
+.title{
+    font-size: 1.5rem;
+    color: var(--main-color);
+    font-weight: 500;
+}
+.form-style{
+    margin-top: 3rem;
+    display: flex;
+    gap: 4rem;
+    
+}
+
+.form-control{
+    width: 18rem;
+}
+
+.form-style label{
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+#submit{
+    color: white;
+    align-self: flex-end;
+    background-color: #41BD81;
+    width: 8rem;
+    line-height: 2.2;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 4px;
+}

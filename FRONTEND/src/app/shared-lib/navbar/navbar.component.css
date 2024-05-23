@@ -1,0 +1,33 @@
+.primary {
+    background-color: #297450; /* Change this to your desired color */
+  }
+
+  .navbar-nav .nav-link {
+    color: white !important;
+    font-family: 'Lexend Tera';
+    margin: auto 0;
+    font-size: 1.1rem;
+    margin-right: 1rem;
+  }
+
+  .logins .btn{
+      color: white !important; /* Setting text color to white */
+      font-family: 'Lexend Tera';
+      margin-right: 1rem;
+    }
+    
+  .secondary{
+      background-color: #41BD81;
+  }
+  
+  .navigator{
+      text-align: center;
+  }
+
+.profile-btn-style{
+  background-color: none;
+}
+.profile-btn-style:active{
+  border:none;
+}
+

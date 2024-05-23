@@ -1,0 +1,186 @@
+<div class="doctor-panel">
+    <div class="header">
+        <span class="title">All Doctors</span>
+        <div class="header-end">
+            <button [class.disabled]="filterQuery=='' && searchQuery==''" type="button" id="clearButton" class=" me-4" (click)="clearFilters()" >Clear Filters</button>
+            <label for="search"></label>
+            <input id="search" type="text" [(ngModel)]="searchQuery" class="form-control" placeholder="Search" aria-label="Recipient's username"
+                aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" (click)="search()" type="button" id="button-addon2"><i
+                    class="bi bi-search"></i></button>
+
+            <div ngbDropdown class="dropdown d-inline-block">
+                <button type="button" class="btn  drop-btn" id="dropdownBasic1" ngbDropdownToggle>
+                    {{ filterQuery || 'Filter by' }} 
+                    <!-- Filter by -->
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button class="dropdown-item" (click)="filter('ACTIVE')"  ngbDropdownItem>Active</button>
+                    <button class="dropdown-item" (click)="filter('INACTIVE')"  ngbDropdownItem>Inactive</button>
+                    <button class="dropdown-item" (click)="filter('LEAVE')"  ngbDropdownItem>Leave</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="list">
+        <div class="container1">
+            <table class="table table-sm">
+                <thead class="head">
+                    <tr>
+                        <th scope="col">Sl no.</th>
+                        <th scope="col">Profile</th>
+                        <th scope="col">Doctor Name</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Specialization</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let doctor of doctorData; let i=index">
+                        <td>{{calculateSlNo(i+1)}}</td>
+                        <td>
+                            <img *ngIf="doctor.profileImgUrl" class="profile-pic" [src]="doctor.profileImgUrl" alt="Doctor Image" />
+                            <img *ngIf="!doctor.profileImgUrl" class="profile-pic" src="/assets/default-pic.jpg" alt="Default Image" />
+                        </td>
+                        <td>{{doctor.name}}</td>
+                        <td>{{doctor.userName}}</td>
+                        <td>{{doctor.email}}</td>
+                        <td>{{doctor.specialization}}</td>
+                        <td><span class="span-style"
+                                    [ngClass] = "{
+                                        green: doctor.status == 'ACTIVE',
+                                        red: doctor.status == 'INACTIVE',
+                                        leave: doctor.status == 'LEAVE'
+                                    }">
+                            {{doctor.status === 'LEAVE' ? 'ON LEAVE' : doctor.status }}</span></td>
+                        <td><button type="button" class="btn-style" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                (click)="showDetails(doctor)"><i class="bi bi-pencil-square fs-4"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+         
+    <!-- pagination -->
+    </div>
+    <nav class="pagination-container" aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"   (click)="page!==0 && pageDecrement()" [class.disabled]="page===0"><a  class="page-link">&laquo; Previous</a></li>
+            <li class="page-item" *ngFor="let p of pages; let i = index" [class.active]="i === page">
+                <a  class="page-link" (click)="setPage(i,$event)" >{{i+1}}</a>
+            </li>
+            <li class="page-item" [class.disabled]="page===pages.length-1"><a class="page-link" (click)="pageIncrement()">Next &raquo;</a></li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-medium" id="exampleModalLabel">Update Details</h5>
+                <button type="button" class="close close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <!-- <span aria-hidden="true">&times;</span> -->
+                    <i class="bi bi-x fs-2 text-muted"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form ngNativeValidate (ngSubmit)="updateSubmit()" id="myForm">
+                    <div class="form-style">
+                        <div class="form-left">
+                            <div class="form-group">
+                                <label for="name">Doctor's name</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    [value]="selectedDoctor.name" [(ngModel)]="selectedDoctor.name" ngbTooltip="Cannot change name" tooltipClass="my-custom-class" disabled>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username"
+                                    name="userName" [value]="selectedDoctor.userName" [(ngModel)]="selectedDoctor.userName" ngbTooltip="Cannot change username" tooltipClass="my-custom-class" disabled>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" [value]="selectedDoctor.email"
+                                    [(ngModel)]="selectedDoctor.email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="leaveStart">Leave Start</label>
+                                <input type="date" class="form-control" id="leaveStart" name="leaveStart"
+                                    [value]="selectedDoctor.leaveStart" [(ngModel)]="selectedDoctor.leaveStart" [min]="minLeaveStartDate.toISOString().split('T')[0]">
+                            </div>
+                            <div class="form-group">
+                                <label for="leaveEnd">Leave End</label>
+                                <input type="date" class="form-control" name="leaveEnd" id="leaveEnd" [(ngModel)]="selectedDoctor.leaveEnd" [value]="selectedDoctor.leaveEnd"  [min]="minLeaveEndDate.toISOString().split('T')[0]"> 
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-img" class="form-label">Profile Photo (Max size: 2 MB)</label>
+                                <input class="form-control" name="profile-img" type="file" id="profile-img" (change)="onFileSelected($event)" accept="image/*"/>
+                                <div *ngIf="fileSizeError" class="text-danger">File size exceeds the limit (2 MB).</div>
+                              </div>
+                        </div>
+
+                        <div class="form-right">
+                            <div class="form-group">
+                                <label for="specialization">Specialization</label>
+                                <input type="text" class="form-control" id="specialization" name="specialization" [value]="selectedDoctor.specialization"
+                                    [(ngModel)]="selectedDoctor.specialization" ngbTooltip="Cannot change specialization" tooltipClass="my-custom-class" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select class="form-select" id="gender" [value]="selectedDoctor.gender" name="gender" placement="top" ngbTooltip="Cannot change gender" tooltipClass="my-custom-class"
+                                [(ngModel)]="selectedDoctor.gender" disabled>
+                                    <option disabled selected>Select your option</option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                    <option value="O">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="experience">ExperienceStart</label>
+                                <input type="year" class="form-control dateYear" id="experience" name="experience"
+                                    [value]="selectedDoctor.experienceStart" [(ngModel)]="selectedDoctor.experienceStart"
+                                    ngbTooltip="Cannot change experienceStart" tooltipClass="my-custom-class" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="fee">Doctor fees</label>
+                                <input type="number" class="form-control" id="fee" name="fees" [value]="selectedDoctor.fees"
+                                    [(ngModel)]="selectedDoctor.fees">
+                            </div>
+                            <div class="form-group">
+                                <label for="qualification">Qualification</label>
+                                <input type="text" class="form-control" id="qualification" name="qualification"
+                                    [value]="selectedDoctor.qualification" [(ngModel)]="selectedDoctor.qualification" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select class="form-select" id="status" [value]="selectedDoctor.status" name="status"
+                                [(ngModel)]="selectedDoctor.status">
+                                    <option value="" disabled selected>Update Status</option>
+                                    <option value="ACTIVE">ACTIVE</option>
+                                    <option value="INACTIVE">INACTIVE</option>
+                                    <!-- <option value="LEAVE">LEAVE</option> -->
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="close" #exampleModal type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn modal-btn-style">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>

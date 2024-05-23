@@ -1,0 +1,19 @@
+<app-navbar></app-navbar>
+<div class="bootstrap-wrapper dashboard ">
+    <div class="container-fluid p-0 ">
+        <div class="row">
+            <div class="col-3 ">
+                <div class="profile">
+
+                </div>
+            </div>
+            <div class="col-9 pt-4">
+                <div class="doctor">
+                    <owl-carousel-o  [options]="customOptions">
+                      <ng-template  carouselSlide (click)="getAppointmentData()" *ngFor="let date of dates"><button class="btn btn-secondary">{{date | date:'fullDate'}}</button></ng-template>  
+                    </owl-carousel-o>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

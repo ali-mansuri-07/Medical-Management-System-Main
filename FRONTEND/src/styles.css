@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import url('https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --main-color: #0B3E25;
+    --button-color: #41BD81;
+    --blue: #0e0620;
+    --white: #fff;
+    --green: #2ccf6d;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans');
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; zoom:100%; }
+
+.carousel-container .owl-prev, .carousel-container .owl-next{
+    background: transparent !important;
+    color: var(--main-color) !important;
+    position: absolute;
+    top:25%;
+}
+
+.carousel-container .owl-next{
+    right: 0;
+}
+
+.carousel-container .owl-prev{
+    left: 0;
+}

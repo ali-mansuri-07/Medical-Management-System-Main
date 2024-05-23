@@ -1,0 +1,120 @@
+<app-navbar></app-navbar>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Theme</title>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="additional-content">
+        <div class="content">
+          <h2 class="review-heading">Top Reviews</h2>
+          <div class="review-container">
+            <button type="button" class="arrow-button arrow-right" *ngIf="page !== 0"
+              (click)="page!==0 && pageDecrement()" [class.disabled]="page===0"><a class="page-link"><i
+                  class="fas fa-chevron-left"></i></a></button>
+            <div class="review-text" *ngIf="feedback.length > 0; else elseBlock">
+
+              <p>{{ feedback[0].review }}</p>
+              <p class="card-text">Rating: <span *ngFor="let star of getStarArray(feedback[0].rating)"><i
+                    class="bi bi-star-fill" style="color: rgb(216, 151, 30)"></i></span></p>
+
+            </div>
+            <button type="button" class="arrow-button arrow-right"
+              *ngIf="page !== pages.length - 1 && pages.length!==0" [class.disabled]="page===pages.length-1"><a
+                class="page-link" (click)="pageIncrement()"><i class="fas fa-chevron-right"></i></a></button>
+          </div>
+          <div class="text-center mt-3 justify-content-center">
+          </div>
+          <ng-template #elseBlock>
+            <p>No more reviews yet</p>
+          </ng-template>
+        </div>
+      </div>
+      <h2 class="review-heading">Please choose an appropriate date</h2>
+      <div class="date-container">
+        <button type="button" class="arrow-button arrow-left" (click)="onPrevClick()"><i
+            class="fas fa-chevron-left"></i></button>
+
+        <button *ngFor="let date of visibleDates" type="button" class="date-button" [@slideInOut]="direction"
+          (click)="onDateClick(date)" [class.active]="selectedDate == date[0]"
+          [class.disabled]="unavailableDate(date)">{{date[1]}} {{date[0]}}</button>
+
+
+        <button type="button" class="arrow-button arrow-right" (click)="onNextClick()"><i
+            class="fas fa-chevron-right"></i></button>
+
+      </div>
+
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h2>Dr. {{doctorDetails?.name | titlecase}}</h2>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <p class="card-text"><span class="fw-bold"> Specialization : </span> {{doctorDetails?.specialization}}
+              </p>
+              <p class="card-text"><span class="fw-bold"> Qualifications :</span> {{doctorDetails?.qualification}}</p>
+              <p class="card-text"><span class="fw-bold"> Experience :</span> {{ getCurrentYear()- getnumberofyearsofexperience() }} years</p>
+              <p class="card-text"><span class="fw-bold"> Gender :</span> {{doctorDetails?.gender}}</p>
+
+
+              <p class="card-text"><span class="fw-bold">Rating :</span> <span
+                  *ngFor="let star of getStarArray(doctorDetails?.rating)"><i class="bi bi-star-fill"
+                    style="color: rgb(216, 151, 30)"></i></span></p>
+              <p class="card-text"><span class="fw-bold">Fees :</span><i
+                  class="bi bi-currency-rupee">{{doctorDetails?.fees}} </i></p>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+              <img *ngIf="doctorDetails?.profileImgUrl" class="profile-pic" [src]="doctorDetails?.profileImgUrl"
+                alt="Doctor Image" />
+              <img *ngIf="!doctorDetails?.profileImgUrl" class="profile-pic" src="/assets/default-pic.jpg"
+                alt="Default Image" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button-list-container" [class.disabled]="selectedDate == null">
+      <h2 class="review-heading">Please book a slot of your choice</h2>
+      <div class="button-list">
+        <button *ngFor="let slot of timeMap; let i = index" type="button" class="btn btn-primary slot-button"
+          (click)="onSlotClick(slot)" [class.active]="selectedSlot === slot" 
+          [class.bookedWithThisDoctor]="isSlotBookedWithThisDoctor(selectedDate, i + 1)" 
+          [class.bookedWithOtherDoctor]="isSlotBookedWithOtherDoctor(selectedDate, i + 1)" 
+          [class.booked]="isSlotBooked(selectedDate, i + 1)">
+          {{ slot }}
+        </button>
+
+      </div>
+
+    </div>
+    <div class="legend">
+      <div class="legend-item">
+        <div class="color-box booked"></div>
+        <span>Cannot book slots booked by other patients</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box bookedWithThisDoctor"></div>
+        <span>You have booked a slot with this doctor</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box bookedWithOtherDoctor"></div>
+        <span>You have already booked on same date and slot with another Doctor</span>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary " id="btn-book"
+      [class.disabled]="isButtonDisabled() || doctorDetails == null" (click)="onBookClick()">Book</button>
+  </div>
+</div>
+
+</body>

@@ -1,0 +1,27 @@
+<div *ngIf="data.isType == 3">
+    <h2 mat-dialog-title>Conditions violated</h2>
+    <mat-dialog-content>{{data.message}}</mat-dialog-content>
+    <mat-dialog-actions>
+        <button class="confirm-button" (click)="closeModal(false)">Close</button>
+    </mat-dialog-actions>
+    </div>
+    <div *ngIf="data.isType == 1">
+    <h2 mat-dialog-title>Booking slot : {{data.selectedSlot}}</h2>
+    <mat-dialog-content class="fw-medium text-dark">Date: {{data.selectedDate}}</mat-dialog-content>
+    <mat-dialog-content>Are you sure?</mat-dialog-content>
+    <mat-dialog-actions>
+        <button class="confirm-button" (click)="closeModal(true)">Book</button>
+        <button id="cancel-button" class="confirm-button" (click)="closeModal(false)">Cancel</button>
+    </mat-dialog-actions>
+    </div>
+    <div *ngIf="data.isType == 2">
+    <h2 mat-dialog-title>Booking slot : {{data.selectedSlot}} on {{data.selectedDate}}</h2>
+    <mat-dialog-content>{{data.message}}</mat-dialog-content>
+    <mat-dialog-actions>
+        <button   class="confirm-button" (click)="closeSuccessModal(false)">OK</button>
+    </mat-dialog-actions>
+    </div>
+    
+    
+      
+    

@@ -1,0 +1,38 @@
+
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-top: 40px;
+}
+
+.card-header {
+  background-color:  #198754;
+  color: white;
+  padding: 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+
+
+.card-body {
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 0;
+}
+
+.profile-pic {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+}
+
+.email{
+  margin-top: 1rem;
+}

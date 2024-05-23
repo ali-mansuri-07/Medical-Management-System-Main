@@ -1,0 +1,48 @@
+<div class="upcoming-appointments panel">
+  <h3>Upcoming Appointments</h3>
+  <div  *ngIf="upcomingAppointments.length > 0; else noUpcomingAppointments">
+    <div
+      class="card"
+      *ngFor="
+        let appointment of upcomingAppointments
+          | paginate
+            : {
+                id: 'upcomingAppointment',
+                itemsPerPage: itemsPerPage,
+                currentPage: upcomingAppointmentsPage
+              };
+        let i = index
+      "
+    >
+      <div class="card-header d-flex justify-content-between">
+        <div class="appointment-number">
+          <!-- Calculate appointment count based on the index and current page -->
+          <h5>Appointment {{ ((upcomingAppointmentsPage-1) * itemsPerPage) + i + 1 }}</h5>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="appointment-description">
+          <div class="row">
+            <div class="col-md-6">
+              <p>
+                <strong>Date: </strong>
+                {{ appointment.appDate | date : "yyyy-MM-dd" }}
+              </p>
+              <p><strong>Slot: </strong> {{ getSlotTime(appointment.slot) }}</p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Patient: </strong> {{ appointment.patientName }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pagination-controls
+      id="upcomingAppointment"
+      (pageChange)="onUpcomingAppointmentsPageChange($event)"
+    ></pagination-controls>
+  </div>
+  <ng-template #noUpcomingAppointments>
+    <span class="No_upcoming_appointments">No Upcoming Appointments</span>
+  </ng-template>
+</div>

@@ -1,0 +1,34 @@
+<div class="panel">
+  <h3>Patient Reviews</h3>
+  <div *ngIf="feedback.length > 0; else noReviews">
+  <div
+    *ngFor="
+      let item of feedback
+        | paginate
+          : {
+              id: 'reviews',
+              itemsPerPage: itemsPerPage,
+              currentPage: upcomingReviewsPage,
+              totalItems: totalElements
+            }
+    "
+    class="feedback-box"
+  >
+    <p>{{ item.review }}</p>
+    <p>
+      Rating:
+      <span *ngFor="let star of getStarArray(item.rating)">
+        <i class="bi bi-star-fill" style="color: rgb(216, 151, 30)"></i>
+      </span>
+    </p>
+  </div>
+  <pagination-controls
+    previousLabel="Prev"
+    nextLabel="Next"
+    id="reviews"
+    (pageChange)="onUpcomingReviewsPageChange($event)"
+  ></pagination-controls>
+</div>
+<ng-template #noReviews>
+  <span class="no-reviews">No Reviews</span>
+</ng-template>

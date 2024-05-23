@@ -1,0 +1,14 @@
+<div  *ngIf="data.isError == 2">
+    <h2 mat-dialog-title>Access denied</h2>
+    <mat-dialog-content>{{data.message}}</mat-dialog-content>
+    <mat-dialog-actions>
+        <button class="confirm-button" (click)="closeModal(false)">OK</button>
+    </mat-dialog-actions>
+    </div>
+    <div *ngIf="data.isError == 1">
+        <h2 mat-dialog-title>Please Login to Book an Appointment</h2>
+        <mat-dialog-content>{{data.message}}</mat-dialog-content>
+        <mat-dialog-actions>
+            <button class="confirm-button" (click)="closeModalForLogin(true)">OK</button>
+        </mat-dialog-actions>
+        </div>

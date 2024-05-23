@@ -1,0 +1,81 @@
+.main-container{
+    height: 85vh;
+    width: 98%;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.top{
+    height: 25%;
+    display: flex;
+    gap: 1rem;
+}
+
+.total{
+    background-color: white;
+    width: 25%;
+    height: 100%;
+    border-radius: 0.5rem;
+    padding : 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left{
+max-width: 60%;
+align-self:center
+}
+
+.right{
+    width: 4.5rem;
+    height:4.5rem;
+    border-radius: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.doctor-icon{
+    background-color: rgb(212, 240, 250);
+    color: rgb(82, 179, 214);
+}
+
+.patient-icon{
+    background-color: #f5d8b1;
+    color: #d48b5e;
+}
+
+.completed-icon{
+    background-color: rgb(204, 255, 184);
+    color: rgb(105, 212, 63);
+}
+
+
+.pending-icon{
+    background-color: rgb(250, 203, 203);
+    color: rgb(245, 113, 113);
+}
+
+
+.bottom{
+    height: 75%;
+    padding: 1rem 0;
+    display: flex;
+    gap: 1rem;
+}
+
+.left-chart{
+    background-color: rgb(255, 255, 255);
+    width: 65%;
+    height: 100%;
+    border-radius: 0.5rem;
+}
+
+.right-chart{
+    padding: 2rem;
+    background-color: white;
+    width: 35%;
+    height: 100%;
+    border-radius: 0.5rem;
+}

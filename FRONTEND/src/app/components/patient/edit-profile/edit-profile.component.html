@@ -1,0 +1,124 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="card">
+    <div class="class-header"><h3>Edit Profile</h3></div>
+    <div class="card-body">
+      <form [formGroup]="editPatientForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name" class="heading">Name:</label>
+              <input
+                type="text"
+                class="form-control custom-input"
+                id="name"
+                formControlName="name"
+                value="{{ name }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="gender" class="heading">Gender:</label>
+              <select
+                class="form-control custom-input"
+                id="gender"
+                formControlName="gender"
+              >
+                <option value="" disabled selected>Select Gender</option>
+                <option value="M" [selected]="gender === 'M'">Male</option>
+                <option value="F" [selected]="gender === 'F'">Female</option>
+                <option value="O" [selected]="gender === 'O'">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="email" class="heading">Email:</label>
+              <input
+                type="email"
+                class="form-control custom-input"
+                id="email"
+                formControlName="email"
+                value="{{ email }}"
+              />
+              <div
+                *ngIf="
+                  editPatientForm.get('email')?.invalid &&
+                  editPatientForm.get('email')?.touched
+                "
+                class="text-danger"
+              >
+                <div *ngIf="editPatientForm.get('email')?.errors?.['required']">
+                  Email is required.
+                </div>
+                <div *ngIf="editPatientForm.get('email')?.errors?.['email']">
+                  Invalid email format.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="bloodGroup" class="heading">Blood Group:</label>
+              <select
+                class="form-control custom-input"
+                id="bloodGroup"
+                formControlName="bloodGroup"
+              >
+                <option value="" disabled selected>Select Blood Group</option>
+                <option value="Ap" [selected]="bloodGroup === 'Ap'">A+</option>
+                <option value="An" [selected]="bloodGroup === 'An'">A-</option>
+                <option value="Bp" [selected]="bloodGroup === 'Bp'">B+</option>
+                <option value="Bn" [selected]="bloodGroup === 'Bn'">B-</option>
+                <option value="ABp" [selected]="bloodGroup === 'ABp'">
+                  AB+
+                </option>
+                <option value="ABn" [selected]="bloodGroup === 'ABn'">
+                  AB-
+                </option>
+                <option value="Op" [selected]="bloodGroup === 'Op'">O+</option>
+                <option value="On" [selected]="bloodGroup === 'On'">O-</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contactNumber" class="heading">Contact Number:</label>
+              <input
+                type="text"
+                class="form-control custom-input"
+                id="contactNumber"
+                formControlName="contactNumber"
+                value="{{ contactNumber }}"
+              />
+              <div
+                *ngIf="
+                  editPatientForm.get('contactNumber')?.invalid &&
+                  editPatientForm.get('contactNumber')?.touched
+                "
+                class="text-danger"
+              >
+                <div
+                  *ngIf="editPatientForm.get('contactNumber')?.errors?.['required']"
+                >
+                  Contact Number is required.
+                </div>
+                <div
+                  *ngIf="editPatientForm.get('contactNumber')?.errors?.['pattern']"
+                >
+                  Invalid contact number format.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="birthYear" class="heading">Birth Year:</label>
+              <input
+                type="text"
+                class="form-control custom-input"
+                id="birthYear"
+                formControlName="birthYear"
+                value="{{ birthYear }}"
+              />
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    
+
+
+    <form (ngSubmit)="register.form.valid && login()" class="login-form" #register="ngForm" novalidate>
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Username"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+          id="username"
+          name="userName"
+          [(ngModel)]="loginData.userName"
+          #userName="ngModel"
+          required
+          minlength="3"
+          maxlength="30"
+          [ngClass]="{ 'is-invalid': userName.invalid && (userName.dirty || userName.touched) }"
+        />
+        <div *ngIf="userName.invalid && (userName.dirty || userName.touched)" class="invalid-feedback">
+          <div *ngIf="userName.errors?.['required']">Username is required.</div>
+          <div *ngIf="userName.errors?.['minlength']">Username must be at least 3 characters.</div>
+          <div *ngIf="userName.errors?.['maxlength']">Username cannot exceed 30 characters.</div>
+        </div>
+      </div>
+    
+      <div class="input-group mb-3">
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Password"
+          aria-label="Password"
+          aria-describedby="basic-addon1"
+          id="password"
+          name="password"
+          [(ngModel)]="loginData.password"
+          #password="ngModel"
+          required
+          minlength="3"
+          [ngClass]="{ 'is-invalid': password.invalid && (password.dirty || password.touched) }"
+        />
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback">
+          <div *ngIf="password.errors?.['required']">Password is required.</div>
+          <div *ngIf="password.errors?.['minlength']">Password must be at least 3 characters.</div>
+        </div>
+      </div>
+    
+    
+      <button type="submit" class="btn btn-success btn-lg" [disabled]="register.form.status==='INVALID'">Login</button>
+    
+      <div class="info-signup">
+        Don't have an account? <a href="signup">Create an account</a>
+      </div>
+    </form>
+    
+  </div>
+<!-- </div> -->

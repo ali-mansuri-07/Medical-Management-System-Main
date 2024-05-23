@@ -1,0 +1,51 @@
+
+<div class="main-container">
+    <div class="top">
+        <div class="total">
+            <div class="left">
+                <h5 class="fs-5 text-muted">Total Doctors</h5>
+                <h2 class="fs-1 mt-5">{{dashboardData?.totalDoctorCount}}</h2>
+            </div>
+            <div class="right doctor-icon">
+               <i class="fa-solid fa-user-doctor fa-2x "></i>
+            </div>
+        </div>
+        <div class="total">
+            <div class="left">
+                <h5 class="fs-5 text-muted">Total Patients</h5>
+                <h2 class="fs-1 mt-5">{{dashboardData?.totalPatientCount}}</h2>
+            </div>
+            <div class="right patient-icon">
+                <i class="fa-solid fa-hospital-user fa-2x"></i>
+            </div>
+        </div>
+        <div class="total">
+            <div class="left">
+                <h5 class="fs-5 text-muted">Total Completed Appointments</h5>
+                <h2 class="fs-1 mt-4">{{dashboardData?.completedAppointmentCount}}</h2>
+            </div>
+            <div class="right completed-icon">
+                <i class="fa-regular fa-calendar-check fa-2x"></i>
+            </div>
+        </div>
+        <div class="total">
+            <div class="left">
+                <h5 class="fs-5 text-muted">Total Pending Appointments</h5>
+                <h2 class="fs-1 mt-4">{{dashboardData?.pendingAppointmentCount}}</h2>
+            </div>
+            <div class="right pending-icon">
+                <i class="fa-solid fa-clock-rotate-left fa-2x"></i>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="left-chart d-flex justify-content-center align-items-center">
+            <div class="p-3">
+                <canvas id="canvas1" #lineChart width="850" height="500"></canvas>
+            </div>
+        </div>
+        <div class="right-chart d-flex justify-content-center">
+        <app-donut-chart></app-donut-chart>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div *ngIf="data.isError == 2">
+    <h2 mat-dialog-title>Cancelling appointment: {{data.selectedDate}} at {{data.selectedSlot}}</h2>
+    <mat-dialog-content>Are you sure</mat-dialog-content>
+    <mat-dialog-actions>
+        <button class="confirm-button" (click)="closeModal(true)">YES</button>
+        <button class="confirm-button" (click)="closeModal(false)">NO</button>
+    </mat-dialog-actions>
+    </div>
+    <div *ngIf="data.isError == 1">
+    <h2 mat-dialog-title>{{data.message}}</h2>
+    <mat-dialog-content>Cancelled appointment: {{data.selectedDate}} at {{data.selectedSlot}}</mat-dialog-content>
+    <mat-dialog-actions>
+        <button class="confirm-button" (click)="closeModal(false)">OK</button>
+    </mat-dialog-actions>
+    </div>

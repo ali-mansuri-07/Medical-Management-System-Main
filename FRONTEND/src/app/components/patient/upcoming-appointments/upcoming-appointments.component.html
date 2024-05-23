@@ -1,0 +1,68 @@
+<div class="upcoming-appointments panel">
+  <h3>Upcoming Appointments</h3>
+  <div  *ngIf="upcomingAppointments.length > 0; else noUpcomingAppointments">
+    <div
+      class=" "
+      *ngFor="
+        let appointment of upcomingAppointments
+          | paginate
+            : {
+                id: 'upcomingAppointment',
+                itemsPerPage: itemsPerPage,
+                currentPage: upcomingAppointmentsPage,
+                totalItems: totalElements
+              };
+        let i = index
+      "
+    >
+      <div class="card-header d-flex justify-content-between">
+        <div class="appointment-number">
+          <h5>
+            Appointment
+            {{ (upcomingAppointmentsPage - 1) * itemsPerPage + i + 1 }}
+          </h5>
+        </div>
+        <div class="appointment-cancel">
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="cancelAppointment(appointment)"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="appointment-description">
+          <div class="row">
+            <div class="col-md-6">
+              <p>
+                <strong>Date:</strong>
+                {{ appointment.appDate | date : "yyyy-MM-dd" }}
+              </p>
+              <p>
+                <strong>Slot:</strong> {{ appointment.slot }}
+              </p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Doctor:</strong> {{ appointment.doctorName | titlecase }}</p>
+              <p>
+                <strong>Specialization:</strong>
+                {{ appointment.specialization |titlecase }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      id="upcomingAppointment"
+      (pageChange)="onUpcomingAppointmentsPageChange($event)"
+    ></pagination-controls>
+  </div>
+  <ng-template #noUpcomingAppointments>
+    <span class="No_upcoming_appointments">No Upcoming Appointments</span>
+  </ng-template>
+</div>

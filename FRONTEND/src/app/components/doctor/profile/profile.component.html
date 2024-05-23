@@ -1,0 +1,63 @@
+<div class="card" *ngIf="doctor">
+  <div class="card-header">
+    <h2>{{ doctor.name | titlecase }}</h2>
+  </div>
+  <div class="card-body">
+    <div style="text-align: center" class="mb-1">
+      <img
+        *ngIf="doctor.profileImgUrl"
+        class="profile-pic"
+        [src]="doctor.profileImgUrl"
+        alt="Doctor Image"
+      />
+      <img
+        *ngIf="!doctor.profileImgUrl"
+        class="profile-pic"
+        src="/assets/default-pic.jpg"
+        alt="Default Image"
+      />
+    </div>
+    <p class="email"><strong>Email: </strong> {{ doctor.email }}</p>
+    <p><strong>Qualifications: </strong> {{ doctor.qualification }}</p>
+    <p><strong>Experience Start: </strong> {{ doctor.experienceStart }}</p>
+    <p><strong>Specialization: </strong>{{ doctor.specialization?.name }}</p>
+
+    <p class="card-text">
+      <strong>Fees: </strong
+      ><i class="bi bi-currency-rupee">{{ doctor?.fees }} </i>
+    </p>
+    <p class="card-text">
+      <strong>Rating: </strong
+      ><span *ngFor="let star of getStarArray(doctor?.rating)"
+        ><i class="bi bi-star-fill" style="color: rgb(216, 151, 30)"></i
+      ></span>
+    </p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header view-appointments">
+    <h6>View Appointments/ Ratings</h6>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12 mb-2">
+        <button
+          [routerLink]="'/doctor/upcoming-appointments'"
+          routerLinkActive="active"
+          class="btn btn-outline-success btn-sm w-100"
+        >
+          <i class="bi bi-calendar-week-fill"></i> Upcoming Appointments
+        </button>
+      </div>
+      <div class="col-md-12">
+        <button
+          [routerLink]="'/doctor/patient-reviews'"
+          routerLinkActive="active"
+          class="btn btn-outline-success btn-sm w-100"
+        >
+          <i class="bi bi-calendar-check-fill"></i> Patient Reviews
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

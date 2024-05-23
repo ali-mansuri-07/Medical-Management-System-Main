@@ -1,0 +1,142 @@
+<div class="completed-appointments panel">
+  <h3>Completed Appointments</h3>
+  <div *ngIf="completedAppointments.length > 0; else noCompletedAppointments">
+    <div
+      class="card1"
+      *ngFor="
+        let appointment of completedAppointments
+          | paginate
+            : {
+                id: 'completedAppointment',
+                itemsPerPage: itemsPerPage,
+                currentPage: completedAppointmentsPage,
+                totalItems: totalElements
+              };
+        let i = index
+      "
+    >
+      <div class="card-header d-flex justify-content-between">
+        <div class="appointment-number">
+          <h5>
+            Appointment
+            {{ (completedAppointmentsPage - 1) * itemsPerPage + i + 1 }}
+          </h5>
+        </div>
+        <div class="appointment-cancel">
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#feedbackModal"
+            (click)="setCurrentAppointment(appointment)"
+            [disabled]="appointment.feedbackSubmitted"
+          >
+            Feedback
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="appointment-description">
+          <div class="row">
+            <div class="col-md-6">
+              <p>
+                <strong>Date:</strong>
+                {{ appointment.appDate | date : "yyyy-MM-dd" }}
+              </p>
+              <p>
+                <strong>Slot:</strong> {{ mapSlotToTime(appointment.slot) }}
+              </p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Doctor:</strong> {{ appointment.doctorName | titlecase }}</p>
+              <p>
+                <strong>Specialization:</strong>
+                {{ appointment.specialization | titlecase}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pagination-controls
+      id="completedAppointment"
+      (pageChange)="onCompletedAppointmentsPageChange($event)"
+    ></pagination-controls>
+  </div>
+  <ng-template #noCompletedAppointments>
+    <span class="No_completed_appointments">No completed appointments.</span>
+  </ng-template>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="feedbackModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="feedbackModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="feedbackModalLabel">Feedback Form</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+        </div>
+        <div class="modal-body">
+          <form
+            #feedbackForm="ngForm"
+            (ngSubmit)="submitFeedbackForm(feedbackForm)"
+          >
+            <div class="form-group">
+              <label for="rating" class="heading">Rating:</label>
+              <select
+                class="form-control"
+                id="rating"
+                name="rating"
+                [(ngModel)]="rating"
+                required
+              >
+                <option value="" disabled selected>Select rating</option>
+                <option value="5">Excellent</option>
+                <option value="4">Good</option>
+                <option value="3">Average</option>
+                <option value="2">Poor</option>
+                <option value="1">Very Poor</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="feedback" class="heading">Additional Comments:</label>
+              <textarea
+                class="form-control"
+                id="feedback"
+                name="feedback"
+                rows="5"
+                [(ngModel)]="feedback"
+              ></textarea>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="submit"
+                class="btn btn-success"
+                data-bs-dismiss="modal"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

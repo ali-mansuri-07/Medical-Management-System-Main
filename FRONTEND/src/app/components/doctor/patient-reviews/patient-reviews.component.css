@@ -1,0 +1,37 @@
+.feedback-box {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.panel {
+  margin-top: 2.5rem;
+  background-color: white;
+  min-height: 35rem;
+  width: 98%;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.panel h3 {
+  padding: 0.75rem;
+  background-color: #198754;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#reviews ::ng-deep .ngx-pagination .current {
+  background: #198754;
+}
+
+.no-reviews {
+  margin-left: 1rem;
+  font-weight: bold;
+}

@@ -1,0 +1,77 @@
+.upcoming-appointments {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.card-header h5 {
+  margin-bottom: 0;
+}
+
+.col-3 {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.card {
+  /* border: 1px solid #ddd; */
+  /* border-radius: 10px; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.card-header {
+  background-color: #198754;
+  color: white;
+  padding: 0.5rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  padding-left: 1rem;
+}
+
+.card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+h2 {
+  margin-bottom: 0;
+}
+
+.appointment-cancel {
+  justify-self: self-end;
+}
+
+#upcomingAppointment ::ng-deep .ngx-pagination .current {
+  background: #198754;
+}
+
+.No_upcoming_appointments {
+  margin-left: 1rem;
+  font-weight: bold;
+}
+
+.upcoming-appointments h3 {
+  padding: 0.75rem;
+  background-color: #198754;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.panel {
+  margin-top: 2.5rem;
+  background-color: white;
+  min-height: 35rem;
+  width: 98%;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

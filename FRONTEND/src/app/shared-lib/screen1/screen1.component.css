@@ -1,0 +1,113 @@
+.secondary{
+    background-color: #41BD81;
+    font-family: 'Lexend Tera';
+}
+
+.card {
+ 
+  margin: 0 0.5em;
+  box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+  border-radius: 2px;
+  border: none;
+  border-radius: 10px;
+}
+
+.card-body{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+}
+
+.disabled-link {
+  pointer-events: none;
+  color: #6c757d;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+#dropdownBasic2{
+  margin-left: 1rem;
+  width: 7rem; 
+  font-weight: bold;
+  height: 3.5rem;
+  border:2px solid #297450;
+  color: #297450;
+}
+.date-container {
+  background-color: #f8f9fa; /* Off white */
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  position: relative;
+}
+.date-button {
+  margin-right: 5px;
+  background-color: #c3e6cb; /* Light green */
+  border-color: #c3e6cb; /* Light green */
+}
+.date-button:hover {
+  background-color: #b1dfbb; /* Light green - darker shade on hover */
+  border-color: #b1dfbb; /* Light green - darker shade on hover */
+}
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: #6c757d; /* Gray */
+  cursor: pointer;
+}
+.arrow-left {
+  left: 5px;
+}
+.arrow-right {
+  right: 5px;
+}
+
+#dropdownBasic2:hover{
+  background-color:#297450;
+  color: white;
+}
+.profile-pic{
+  height: 8rem;
+  width: 8rem;
+  border-radius: 50%;
+}
+
+
+.drop-item:hover{
+  background-color:#41BD81;
+  color:white;
+}
+
+
+.drop-item:active{
+  background-color:#41BD81;
+}
+
+.pagination li a {
+  color: var(--main-color);
+  cursor: pointer;
+}
+
+
+.pagination .page-item.active .page-link {
+  border: 1px solid var(--main-color);
+  background-color: var(--main-color);
+  color: white;
+}
+/* For small screens (up to 767px) */
+@media (max-width: 767px) {
+    .responsive-image {
+      width: 100%; /* Make the image 100% width on small screens */
+    }
+  }
+  
+  /* For large screens (from 768px and above) */
+  @media (min-width: 768px) {
+    .responsive-image {
+      width: 80%; /* Make the image 80% width on large screens */
+    }
+  }
+  

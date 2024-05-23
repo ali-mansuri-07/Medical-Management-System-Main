@@ -1,0 +1,142 @@
+<app-navbar></app-navbar>
+<!-- <div>
+    <h2>Signup</h2>
+    <form (ngSubmit)="signup()" >
+      <label for="newUsername">Username:</label>
+      <input type="text" id="newUsername" name="newUsername" [(ngModel)]="signupData.userName" required>
+  
+      <label for="newPassword">Password:</label>
+      <input type="password" id="newPassword" name="newPassword" [(ngModel)]="signupData.password" required>
+  
+      <button type="submit">Signup</button>
+    </form>
+  </div> -->
+    <div class="login-container">
+      <h2>Sign Up</h2>
+
+<!-- <div class="container"> -->
+<div class="login-container">
+  <h2>Sign Up</h2>
+
+  <form
+    (ngSubmit)="form.valid && signup()"
+    class="login-form"
+    [formGroup]="form"
+    novalidate
+  >
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Username"
+        aria-label="Username"
+        aria-describedby="basic-addon1"
+        id="username"
+        formControlName="userName"
+        [ngClass]="{
+          'is-invalid':
+            form.get('userName')?.invalid &&
+            (form.get('userName')?.dirty || form.get('userName')?.touched)
+        }"
+      />
+      <div
+        *ngIf="
+          form.get('userName')?.invalid &&
+          (form.get('userName')?.dirty || form.get('userName')?.touched)
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="form.get('userName')?.errors?.['required']">
+          Username is required.
+        </div>
+        <div *ngIf="form.get('userName')?.errors?.['minlength']">
+          Username must be at least 3 characters.
+        </div>
+        <div *ngIf="form.get('userName')?.errors?.['maxlength']">
+          Username cannot exceed 30 characters.
+        </div>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Password"
+        aria-label="Password"
+        aria-describedby="basic-addon1"
+        id="password"
+        formControlName="password"
+        [ngClass]="{
+          'is-invalid':
+            form.get('password')?.invalid &&
+            (form.get('password')?.dirty || form.get('password')?.touched)
+        }"
+      />
+      <div
+        *ngIf="
+          form.get('password')?.invalid &&
+          (form.get('password')?.dirty || form.get('password')?.touched)
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="form.get('password')?.errors?.['required']">
+          Password is required.
+        </div>
+        <div *ngIf="form.get('password')?.errors?.['minlength']">
+          Password must be at least 3 characters.
+        </div>
+        <div *ngIf="form.get('password')?.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, one number, and be at least 8 characters long.</div>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Confirm Password"
+        aria-label="Confirm Password"
+        aria-describedby="basic-addon1"
+        id="confirmPassword"
+        formControlName="confirmPassword"
+        [ngClass]="{
+          'is-invalid':
+            form.get('confirmPassword')?.invalid &&
+            (form.get('confirmPassword')?.dirty ||
+              form.get('confirmPassword')?.touched)
+        }"
+      />
+      <div
+        *ngIf="
+          form.get('confirmPassword')?.invalid &&
+          (form.get('confirmPassword')?.dirty ||
+            form.get('confirmPassword')?.touched)
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="form.get('confirmPassword')?.errors?.['required']">
+          Confirm Password is required.
+        </div>
+        <div *ngIf="form.get('confirmPassword')?.errors?.['minlength']">
+          Password must be at least 3 characters.
+        </div>
+        <div *ngIf="form?.errors?.['mismatch'] && form?.touched">
+          Passwords do not match.
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-success btn-lg"
+      [disabled]="!form.valid"
+    >
+      Sign Up
+    </button>
+
+    <div class="info-signup">
+      Already have an account? <a href="login">Login Here</a>
+    </div>
+  </form>
+</div>
+<!-- </div> -->

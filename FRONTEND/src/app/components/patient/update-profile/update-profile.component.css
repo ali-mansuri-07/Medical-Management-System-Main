@@ -1,0 +1,43 @@
+.container {
+  padding-top: 60px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+.btn-success {
+  margin-top: 20px;
+}
+.btn.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.custom-input:focus {
+  border-color: rgb(2, 23, 2);
+  box-shadow: 0 0 0 0.2rem rgba(69, 155, 69, 0.25);
+}
+
+.class-header {
+  background-color: #198754;
+  color: white;
+  padding: 1rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+}

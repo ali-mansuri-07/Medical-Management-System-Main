@@ -1,0 +1,79 @@
+
+.login-container {
+  width: 90%;
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+h2 {
+  text-align: center;
+  color: #297450; /* Green */
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.login-form label {
+  display: block;
+  font-weight: bold;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.login-form button {
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  background-color: #f9f9f9;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+  outline: none;
+  border-color: #4CAF50; /* Green */
+}
+
+.login-form input[type="text"]::placeholder,
+.login-form input[type="password"]::placeholder {
+  color: #aaa;
+}
+
+.info-signup {
+  font-style: italic;
+}
+
+.error{
+  border: 1px solid red;
+}
